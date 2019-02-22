@@ -16,8 +16,8 @@ Either(T1, T2) == {x \in [left : Option(T1), right : Option(T2)] :
 
 toLeft(x)  == [left |-> some(x), right |-> none]
 toRight(x) == [left |-> none, right |-> some(x)]
-fromLeft(x) == x.left
-fromRight(x) == x.right
+fromLeft(x) == fromSome(x.left)
+fromRight(x) == fromSome(x.right)
 isLeft(x)  == isSome(x.left)
 isRight(x)  == isSome(x.right)
 
