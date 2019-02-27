@@ -2,7 +2,7 @@
 EXTENDS Naturals, Sequences, TLC
 ------------------------------------------------------
 
-Option(S) == {x \in Seq(S) : Len(x) <= 1}
+Option(S) == {<<"none">>} \union ({"some"} \X S)
 none == <<"none">>
 toSome(x) == <<"some", x>>
 isSome(x) == x[0] = "some"
