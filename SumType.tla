@@ -3,22 +3,19 @@ EXTENDS Naturals, Sequences, TLC
 ------------------------------------------------------
 
 Option(S) == {x \in Seq(S) : Len(x) <= 1}
-none == << >>
-some(x) == <<x>>
-isSome(x) == x /= << >>
-isNone(x) == x = << >>
+none == <<"none">>
+toSome(x) == <<"some", x>>
+isSome(x) == x[0] = "some"
+isNone(x) == x[0] = "none"
 fromSome(x) == x[1]
 
-Either(T1, T2) == {x \in [left : Option(T1), right : Option(T2)] :
-  /\ ~(x.left = none /\ x.right = none)
-  /\ ~(x.left /= none /\ x.right /= none)
-}
+Either(T1, T2) == ({"left"} \X T1) \union ({"right"} \X T2)
 
-toLeft(x)  == [left |-> some(x), right |-> none]
-toRight(x) == [left |-> none, right |-> some(x)]
-fromLeft(x) == fromSome(x.left)
-fromRight(x) == fromSome(x.right)
-isLeft(x)  == isSome(x.left)
-isRight(x)  == isSome(x.right)
+toLeft(x)  == <<"left", x>>
+toRight(x) == <<"right", x>>
+fromLeft(x) == x[1]
+fromRight(x) == x[1]
+isLeft(x)  == x[0] = "left"
+isRight(x)  == x[0] = "right"
 
 =======================================================
